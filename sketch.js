@@ -2,6 +2,7 @@ var bg, backgroundImg ;
 var stone ;
 var stoneGroup;
 var diamondGroup;
+var diamondCollected;
 function preload() {
   bgAnimation  = loadAnimation("images/bg.jpg","images/bg.jpg","images/bg.jpg");
   ironImg      = loadImage("images/iron.png");
@@ -10,13 +11,13 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1500, 600);
+  createCanvas(1000, 500);
   bg   = createSprite(300,300,300,300);
   iron = createSprite(100,450);
   bg.addAnimation("bgAnimation",bgAnimation);
   bg.scale = 2;
   iron.addImage(ironImg);
-  iron.scale = 0.4;
+  iron.scale = 0.3;
   bg.velocityY = 4;
   edges=createEdgeSprites();
   stoneGroup   = new Group();
@@ -61,12 +62,14 @@ function draw() {
   generateDiamonds();
   generateStones();
   drawSprites();   
+  stroke("red");
+  text("diamonds Collected : " , diamondCollected,300,200);
 }
 function generateStones(){
   if(frameCount%100 == 0){
-    stone = createSprite(random(150,1500),0,40,10);
+    stone = createSprite(random(150,1000),0,40,10);
     stone.addImage(stoneImage)
-    stone.scale = 0.8;
+    stone.scale = 0.6;
     stone.velocityY = 4;
     stone.lifetime = 350;
     stoneGroup.add(stone);
@@ -74,8 +77,9 @@ function generateStones(){
 }
 function generateDiamonds(){
   if(frameCount%40 == 0){
-    diamond = createSprite(random(150,1500),0,40,10);
+    diamond = createSprite(random(150,1000),0,40,10);
     diamond.addImage(diamondImage);
+    diamond.scale = 0.5;
     diamond.velocityY = 4;
     diamond.lifetime = 350;
     diamondGroup.add(diamond);
